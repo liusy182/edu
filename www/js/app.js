@@ -84,13 +84,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/tab/chats');
 })
 .run(function ($rootScope, $state) {
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     event.preventDefault();
     //TODO: need to detect error and revert back to login page
-    if (error === 'AUTH_REQUIRED') {
+    if (error === 'some error that shows authentication failed') {
      $state.go('login');
     }
   });
