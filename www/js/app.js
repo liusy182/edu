@@ -20,6 +20,9 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
+  // default
+  $urlRouterProvider.otherwise('/tab/home');
+
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -28,7 +31,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
     .state('login', {
       url: '/login',
       controller: "LoginCtrl",
-      templateUrl: 'templates/account/login.html'
+      templateUrl: 'templates/login.html'
   })
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -39,12 +42,12 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.home', {
+    url: '/home',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'home': {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
       }
     }
   })
@@ -52,8 +55,8 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
   .state('tab.chats', {
       url: '/chats',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
+        'chats': {
+          templateUrl: 'templates/chats.html',
           controller: 'ChatsCtrl'
         }
       }
@@ -61,7 +64,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
-        'tab-chats': {
+        'chats': {
           templateUrl: 'templates/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }
@@ -71,15 +74,13 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
   .state('tab.account', {
     url: '/account',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+      'account': {
+        templateUrl: 'templates/account.html',
         controller: 'AccountCtrl'
       }
     }
   });
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
 })
 .run(function ($rootScope, $state) {
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
