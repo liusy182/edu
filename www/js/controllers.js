@@ -40,8 +40,8 @@ angular.module('app.controllers', [])
 
     function register() {
       Users.register({
-          email: login.user.email,
-          password: login.user.password
+          email: $scope.login.user.email,
+          password: $scope.login.user.password
       })
       .then(onLogin)
       .catch(onError)
@@ -49,7 +49,7 @@ angular.module('app.controllers', [])
     }
 
     function onLogin() {
-      UserModel.login({
+      Users.login({
           email: login.user.email,
           password: login.user.password
       })
