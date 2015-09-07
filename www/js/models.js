@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.models')
+angular.module('app.models')
   .service('UserModel', 
     [, function () {
     var service = this,
