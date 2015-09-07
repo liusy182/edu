@@ -22,57 +22,58 @@ angular.module('app.controllers', [])
   }])
 
   .controller('AccountCtrl', function($scope) {
-    $scope.settings = {
-      enableFriends: true
-    };
   })
 
-  .controller('LoginCtrl', ['Users', '$state', '$scope', function (UserModel, $state, $scope) {
-    $scope.login = this;
+  .controller('LoginCtrl', [/*'Users',*/ '$state', '$scope', function ($state, $scope) {
 
-    $scope.login.loading = false;
+    //TODO: 
+    //1. add form validataion ngForm.$valid
+    //2. hook up with model
 
-    $scope.login.user = {
+    $scope.loading = false;
+
+    $scope.user = {
       email: '',
       password: '',
       register: false
     };
 
     function register() {
-      Users.register({
-          email: $scope.login.user.email,
-          password: $scope.login.user.password
-      })
-      .then(onLogin)
-      .catch(onError)
-      .finally(onCompletion);
+      // Users.register({
+      //     email: $scope.user.email,
+      //     password: $scope.user.password
+      // })
+      // .then(onLogin)
+      // .catch(onError)
+      // .finally(onCompletion);
     }
 
     function onLogin() {
-      Users.login({
-          email: login.user.email,
-          password: login.user.password
-      })
-      .then(onSuccess)
-      .catch(onError)
-      .finally(onCompletion);
+      // Users.login({
+      //     email: $scope.user.email,
+      //     password: $scope.user.password
+      // })
+      // .then(onSuccess)
+      // .catch(onError)
+      // .finally(onCompletion);
     }
 
     function onSuccess(result) {
-      $state.go('boards');
+      $state.go('tab.home');
     }
 
     function onError(reason) {
-      login.error = reason.message;
+      $scope.error = reason.message;
     }
 
     function onCompletion() {
-      login.reset();
+      $scope.reset();
     }
 
-    login.submit = function (user, isValid, isRegistering) {
+    $scope.submit = function (user, isValid, isRegistering) {
+      onSuccess();
       if (isValid) {
-        login.loading = true;
+        $scope.loading = true;
 
         if (isRegistering) {
           register();
@@ -82,9 +83,9 @@ angular.module('app.controllers', [])
       }
     };
 
-    login.reset = function () {
-      login.loading = false;
-      login.user = {
+    $scope.reset = function () {
+      $scope.loading = false;
+      $scope.user = {
         email: '',
         password: '',
         register: false
