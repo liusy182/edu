@@ -2,6 +2,11 @@ angular.module('app.controllers', [])
 
   .controller('HomeCtrl', function($scope) {})
 
+  .controller('GroupsCtrl', ['$scope', 'Groups' , function($scope, Groups) {
+    $scope.groups = Groups.all();
+
+  }])
+
   .controller('ChatsCtrl', ['$scope', 'Chats' , function($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.

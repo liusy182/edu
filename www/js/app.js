@@ -52,6 +52,16 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services'])
     }
   })
 
+  .state('tab.groups', {
+    url: '/groups',
+    views: {
+      'groups': {
+        templateUrl: 'templates/groups.html',
+        controller: 'GroupsCtrl'
+      }
+    }
+  })
+
   .state('tab.chats', {
       url: '/chats',
       views: {
