@@ -1,5 +1,18 @@
 angular.module('app.controllers', [])
 
+  .controller('TabsCtrl', ['$scope', '$state', function($scope, $state) {
+    console.log('state is ', $state.is('tab.chat-detail'));
+    
+    $scope.hideTabs = function() {
+      if($state.is('tab.chat-detail')){
+        return 'tabs-item-hide';
+      } else {
+        return '';
+      }
+    };
+
+  }])
+  
   .controller('HomeCtrl', function($scope) {})
 
   .controller('GroupsCtrl', ['$scope', 'Groups' , function($scope, Groups) {
