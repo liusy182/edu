@@ -3,7 +3,7 @@ angular.module('app.controllers', [])
   .controller('TabsCtrl', ['$scope', '$state', function($scope, $state) {
     console.log('state is ', $state.is('tab.chat-detail'));
     
-    $scope.hideTabs = function() {
+    $scope.hideTabBar = function() {
       if($state.is('tab.chat-detail')){
         return 'tabs-item-hide';
       } else {
@@ -37,6 +37,14 @@ angular.module('app.controllers', [])
 
   .controller('ChatDetailCtrl', ['$scope', '$stateParams', 'Chats', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
+    $scope.onInputFocus = function(){
+
+    };
+    $scope.onInputBlur = function() {
+
+    };
+
+
   }])
 
   .controller('AccountCtrl', function($scope) {
