@@ -163,14 +163,9 @@ angular.module('monospaced.elastic', [])
               ta.style.overflowY = overflow || 'hidden';
 
               if (taHeight !== mirrorHeight) {
-                console.log('elastic:resize');
                 scope.$emit('elastic:resize', $ta, taHeight, mirrorHeight);
                 ta.style.height = mirrorHeight + 'px';
               }
-
-              console.log('taResize');
-              //SY: a hack here. chat will listen to resize event
-              scope.$emit('taResize', $ta); 
 
               // small delay to prevent an infinite loop
               $timeout(function() {

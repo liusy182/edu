@@ -193,17 +193,16 @@ angular.module('app.controllers', [])
       }
     };
     
-    // custom emitted event in angular-elastic in elastic.js @ line 171
-    $scope.$on('taResize', function(e, ta) {
+    $scope.$on('elastic:resize', function(e, ta, taHeight, mirrorHeight) {
       //console.log('taResize');
       if (!ta) return;
       
-      var taHeight = ta[0].offsetHeight;
-      //console.log('taHeight: ' + taHeight);
+      //var taHeight = ta[0].offsetHeight;
+      console.log('ta height: ', taHeight, mirrorHeight);
       
       if (!footerBar) return;
       
-      var newFooterHeight = taHeight + 10;
+      var newFooterHeight = mirrorHeight + 10;
       newFooterHeight = (newFooterHeight > 44) ? newFooterHeight : 44;
       
       footerBar.style.height = newFooterHeight + 'px';
