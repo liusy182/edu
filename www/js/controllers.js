@@ -73,13 +73,13 @@ angular.module('app.controllers', [])
       }, 0);
 
       messageCheckTimer = $interval(function() {
-        // here you could check for new messages if your app doesn't use push notifications or user disabled them
+        // check for new messages if your doesn't 
+        //use push notifications or user disabled them
       }, 20000);
     });
 
     $scope.$on('$ionicView.leave', function() {
       console.log('leaving UserMessages view, destroying interval');
-      // Make sure that the interval is destroyed
       if (angular.isDefined(messageCheckTimer)) {
         $interval.cancel(messageCheckTimer);
         messageCheckTimer = undefined;
@@ -144,8 +144,6 @@ angular.module('app.controllers', [])
         keepKeyboardOpen();
         viewScroll.scrollBottom(true);
       }, 2000);
-
-      //});
     };
     
     // this keeps the keyboard open on a device only after sending a message, it is non obtrusive
@@ -162,18 +160,17 @@ angular.module('app.controllers', [])
       console.log('message: ' + JSON.stringify(message, null, 2));
       $ionicActionSheet.show({
         buttons: [{
-          text: 'Copy Text'
+          text: 'Copy'
         }, {
-          text: 'Delete Message'
+          text: 'Delete'
         }],
         buttonClicked: function(index) {
           switch (index) {
-            case 0: // Copy Text
+            case 0: // Copy
               //cordova.plugins.clipboard.copy(message.text);
 
               break;
             case 1: // Delete
-              // no server side secrets here :~)
               $scope.messages.splice(itemIndex, 1);
               $timeout(function() {
                 viewScroll.resize();
@@ -196,7 +193,7 @@ angular.module('app.controllers', [])
       }
     };
     
-    // I emit this event from the monospaced.elastic directive, read line 480
+    // custom emitted event in angular-elastic in elastic.js @ line 171
     $scope.$on('taResize', function(e, ta) {
       console.log('taResize');
       if (!ta) return;

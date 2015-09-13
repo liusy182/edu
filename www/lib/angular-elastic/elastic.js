@@ -167,6 +167,9 @@ angular.module('monospaced.elastic', [])
                 ta.style.height = mirrorHeight + 'px';
               }
 
+              //SY: a hack here. chat will listen to resize event
+              scope.$emit('taResize', $ta); 
+
               // small delay to prevent an infinite loop
               $timeout(function() {
                 active = false;
