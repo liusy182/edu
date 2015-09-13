@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app', 
-  ['ionic', 'app.controllers', 'app.services', 'app.filters', 'app.directives'])
+  ['ionic', 'monospaced.elastic', 'angularMoment', 'app.controllers', 'app.services', 'app.filters', 'app.directives'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -102,4 +102,5 @@ angular.module('app',
     }
   });
 });
+
 

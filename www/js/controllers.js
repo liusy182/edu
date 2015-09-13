@@ -67,8 +67,8 @@ angular.module('app.controllers', [])
       getMessages();
       
       $timeout(function() {
-        footerBar = document.body.querySelector('#userMessagesView .bar-footer');
-        scroller = document.body.querySelector('#userMessagesView .scroll-content');
+        footerBar = document.body.querySelector('#chatDetailView .bar-footer');
+        scroller = document.body.querySelector('#chatDetailView .scroll-content');
         txtInput = angular.element(footerBar.querySelector('textarea'));
       }, 0);
 
@@ -210,6 +210,11 @@ angular.module('app.controllers', [])
       scroller.style.bottom = newFooterHeight + 'px'; 
     });
 
+    $scope.onProfilePicError = function(ele) {
+      console.log('onProfilePicError');
+      this.ele.src = ''; // set a fallback
+    };
+
   }])
 
   .controller('AccountCtrl', function($scope) {
@@ -284,3 +289,23 @@ angular.module('app.controllers', [])
     };
   }])
 ;
+
+
+// configure moment relative time
+moment.locale('en', {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: "%d sec",
+    m: "a minute",
+    mm: "%d minutes",
+    h: "an hour",
+    hh: "%d hours",
+    d: "a day",
+    dd: "%d days",
+    M: "a month",
+    MM: "%d months",
+    y: "a year",
+    yy: "%d years"
+  }
+});
