@@ -161,8 +161,6 @@ angular.module('app.controllers', [])
       $ionicActionSheet.show({
         buttons: [{
           text: 'Copy'
-        }, {
-          text: 'Delete'
         }],
         buttonClicked: function(index) {
           switch (index) {
@@ -170,16 +168,20 @@ angular.module('app.controllers', [])
               //cordova.plugins.clipboard.copy(message.text);
 
               break;
-            case 1: // Delete
-              $scope.messages.splice(itemIndex, 1);
-              $timeout(function() {
-                viewScroll.resize();
-              }, 0);
-
-              break;
-          }
-          
+          } 
           return true;
+        },
+        destructiveText: 'Delete',
+        destructiveButtonClicked: function() {
+          $scope.messages.splice(itemIndex, 1);
+          $timeout(function() {
+              viewScroll.resize();
+          }, 0);
+          return true;
+        },
+        cancelText: 'Cancel',
+        cancel: function() {
+          hideSheet();
         }
       });
     };
@@ -198,7 +200,7 @@ angular.module('app.controllers', [])
       if (!ta) return;
       
       //var taHeight = ta[0].offsetHeight;
-      console.log('ta height: ', taHeight, mirrorHeight);
+      //console.log('ta height: ', taHeight, mirrorHeight);
       
       if (!footerBar) return;
       
