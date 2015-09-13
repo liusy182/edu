@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
 
   .controller('TabsCtrl', ['$scope', '$state', function($scope, $state) {
-    console.log('state is ', $state.is('tab.chat-detail'));
+    //console.log('state is ', $state.is('tab.chat-detail'));
     
     $scope.hideTabBar = function() {
       if($state.is('tab.chat-detail')){
@@ -39,15 +39,15 @@ angular.module('app.controllers', [])
     // mock acquiring data via $stateParams
     $scope.toUser = {
       _id: '534b8e5aaa5e7afc1b23e69b',
-      pic: 'http://ionicframework.com/img/docs/venkman.jpg',
-      username: 'Venkman'
+      pic: '',
+      username: 'Student A'
     }
 
     // this could be on $rootScope rather than in $stateParams
     $scope.user = {
-      _id: '534b8fb2aa5e7afc1b23e69c',
-      pic: 'http://ionicframework.com/img/docs/mcfly.jpg',
-      username: 'Marty'
+      _id: '534b8fb2aa5e7afc1b23e69c', //me
+      pic: '',
+      username: 'Teacher B'
     };
 
     $scope.input = {
@@ -62,7 +62,7 @@ angular.module('app.controllers', [])
     var txtInput; // ^^^
 
     $scope.$on('$ionicView.enter', function() {
-      console.log('UserMessages $ionicView.enter');
+      //console.log('UserMessages $ionicView.enter');
 
       getMessages();
       
@@ -79,7 +79,7 @@ angular.module('app.controllers', [])
     });
 
     $scope.$on('$ionicView.leave', function() {
-      console.log('leaving UserMessages view, destroying interval');
+      //console.log('leaving UserMessages view, destroying interval');
       if (angular.isDefined(messageCheckTimer)) {
         $interval.cancel(messageCheckTimer);
         messageCheckTimer = undefined;
@@ -107,7 +107,7 @@ angular.module('app.controllers', [])
     }
 
     $scope.$watch('input.message', function(newValue, oldValue) {
-      console.log('input.message $watch, newValue ' + newValue);
+      //console.log('input.message $watch, newValue ' + newValue);
       if (!newValue) newValue = '';
       localStorage['userMessage-' + $scope.toUser._id] = newValue;
     });
@@ -148,16 +148,16 @@ angular.module('app.controllers', [])
     
     // this keeps the keyboard open on a device only after sending a message, it is non obtrusive
     function keepKeyboardOpen() {
-      console.log('keepKeyboardOpen');
+      //console.log('keepKeyboardOpen');
       txtInput.one('blur', function() {
-        console.log('textarea blur, focus back on it');
+        //console.log('textarea blur, focus back on it');
         txtInput[0].focus();
       });
     }
 
     $scope.onMessageHold = function(e, itemIndex, message) {
-      console.log('onMessageHold');
-      console.log('message: ' + JSON.stringify(message, null, 2));
+      //console.log('onMessageHold');
+      //console.log('message: ' + JSON.stringify(message, null, 2));
       $ionicActionSheet.show({
         buttons: [{
           text: 'Copy'
@@ -195,11 +195,11 @@ angular.module('app.controllers', [])
     
     // custom emitted event in angular-elastic in elastic.js @ line 171
     $scope.$on('taResize', function(e, ta) {
-      console.log('taResize');
+      //console.log('taResize');
       if (!ta) return;
       
       var taHeight = ta[0].offsetHeight;
-      console.log('taHeight: ' + taHeight);
+      //console.log('taHeight: ' + taHeight);
       
       if (!footerBar) return;
       
@@ -211,7 +211,7 @@ angular.module('app.controllers', [])
     });
 
     $scope.onProfilePicError = function(ele) {
-      console.log('onProfilePicError');
+      //console.log('onProfilePicError');
       this.ele.src = ''; // set a fallback
     };
 
