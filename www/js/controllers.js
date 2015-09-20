@@ -1,3 +1,5 @@
+'user strict';
+
 angular.module('app.controllers', [])
 
   .controller('TabsCtrl', ['$scope', '$state', function($scope, $state) {
