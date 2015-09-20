@@ -123,7 +123,7 @@ angular.module('app.services', [])
       }
     };
   })
-  .factory('Users', [, function () {
+  .factory('Users', ['$q', function ($q) {
     var currentUser = null;
 
     return {
@@ -136,9 +136,21 @@ angular.module('app.services', [])
       },
 
       login: function (user) {
+        var deferred = $q.defer();
+        if(user.email && user.password){
+          currentUser = {
+            email: user.email,
+            password: user.password
+          };
+          deferred.resolve(currentUser);
+        } else {
+          deferred.reject('error');
+        }
+        return deferred.promise;
       },
 
       register: function (user) {
+
       },
 
       logout: function () {

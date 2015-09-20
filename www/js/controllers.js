@@ -223,7 +223,7 @@ angular.module('app.controllers', [])
   .controller('AccountCtrl', function($scope) {
   })
 
-  .controller('LoginCtrl', [/*'Users',*/ '$state', '$scope', function ($state, $scope) {
+  .controller('LoginCtrl', ['Users', '$state', '$scope', function (Users, $state, $scope) {
 
     //TODO: 
     //1. add form validataion ngForm.$valid
@@ -238,30 +238,34 @@ angular.module('app.controllers', [])
     };
 
     function register() {
-      // Users.register({
-      //     email: $scope.user.email,
-      //     password: $scope.user.password
-      // })
-      // .then(onLogin)
-      // .catch(onError)
-      // .finally(onCompletion);
+      console.log('register');
+      Users.register({
+          email: $scope.user.email,
+          password: $scope.user.password
+      })
+      .then(onLogin)
+      .catch(onError)
+      .finally(onCompletion);
     }
 
     function onLogin() {
-      // Users.login({
-      //     email: $scope.user.email,
-      //     password: $scope.user.password
-      // })
-      // .then(onSuccess)
-      // .catch(onError)
-      // .finally(onCompletion);
+      console.log('login');
+      Users.login({
+          email: $scope.user.email,
+          password: $scope.user.password
+      })
+      .then(onSuccess)
+      .catch(onError)
+      .finally(onCompletion);
     }
 
     function onSuccess(result) {
+      console.log('login success');
       $state.go('tab.home');
     }
 
     function onError(reason) {
+      console.log('login error');
       $scope.error = reason.message;
     }
 
@@ -269,17 +273,13 @@ angular.module('app.controllers', [])
       $scope.reset();
     }
 
-    $scope.submit = function (user, isValid, isRegistering) {
-      onSuccess();
-      if (isValid) {
+    $scope.submit = function () {
+      //if (isValid) {
         $scope.loading = true;
 
-        if (isRegistering) {
-          register();
-        } else {
-          onLogin();
-        }
-      }
+        $scope.user.register ? register(): onLogin();
+
+      //}
     };
 
     $scope.reset = function () {
